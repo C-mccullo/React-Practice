@@ -1,3 +1,4 @@
+import _ from 'lodash';
 // react understands how to render the components into HTML but we need to include a library that knows how to render those elements to the DOM
 import React, { Component } from 'react';
 // ReactDOM knows how to render the components to the DOM
@@ -17,19 +18,40 @@ class App extends React.Component {
 
 	constructor(props){
 		super(props);
-		this.state = { videos: [] };
+		this.state = { 
+			videos: [],
+			selectedVideo: null
+		};
+		// The Initial Search
+		this.videoSearch('surfboards');
+	}
 
-		YTSearch({ key: Api_Key, term: 'surfing'}, (data) => {
-			this.setState({ videos: data });
+	videoSearch(term) {
+		// function is within the constructor so that the search results happen immediately
+		YTSearch({ key: Api_Key, term: term}, (data) => {
+			// these are the youtube API initializers
+			this.setState({ 
+				videos: data,
+				// on initial load, the first video in the videos list will be named selectedVideo
+				selectedVideo: data[0]
+			});
 		});
 	}
+
 	// videos on VideoList is a "prop"
 	render() {
+		// debounce is used to "throttle" a function, it will take the inner function and return a "new" function that will only be called once every 300 milliseconds. 
+		const videoSearch =_.debounce((term) => {this.videoSearch(term) },500);
+
 		return (
 			<div>
-				<SearchBar/>
-				<VideoDetail videos={this.state.videos[0]}/>
-				<VideoList videos={this.state.videos} />
+				<SearchBar onSearchTermChange={videoSearch}/>
+				<VideoDetail video={this.state.selectedVideo}/>
+			{/* passing property of onVideoSelect to VideoList*/}
+				<VideoList 
+					videos={this.state.videos} 
+					onVideoSelect={ selectedVideo => this.setState({ selectedVideo }) } 
+				/>
 			</div>
 		);
 	}
