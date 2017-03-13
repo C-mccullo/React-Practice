@@ -1,4 +1,4 @@
-// This component has no need for state so will not need ReactDOM
+ // This component has no need for state so will not need ReactDOM
 import React from 'react';
 import VideoListItem from './video_list_item';
 const VideoList = (props) => {

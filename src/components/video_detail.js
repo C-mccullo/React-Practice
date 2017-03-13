@@ -5,6 +5,7 @@ const VideoDetail = ({video}) => {
 	if (!video) {
 		// app loads up and when video array is empty this div will be rendered.
 		return (
+
 			<div className="notThereYet"> 
 				<h2>Loading...</h2> 
 			</div>

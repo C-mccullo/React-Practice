@@ -15,14 +15,14 @@ const Api_Key = 'AIzaSyBlceOCerEMzouasuDtjslQKvo8itJdB_Q';
 // track of the youtube api through its state.
 
 class App extends React.Component {
-
+	// Setting the Initial State
 	constructor(props){
 		super(props);
 		this.state = { 
 			videos: [],
 			selectedVideo: null
 		};
-		// The Initial Search
+		// The Initial Search on Load of App
 		this.videoSearch('surfboards');
 	}
 
@@ -50,7 +50,7 @@ class App extends React.Component {
 			{/* passing property of onVideoSelect to VideoList*/}
 				<VideoList 
 					videos={this.state.videos} 
-					onVideoSelect={ selectedVideo => this.setState({ selectedVideo }) } 
+					onVideoSelect={ (selectedVideo) => this.setState({ selectedVideo }) } 
 				/>
 			</div>
 		);
