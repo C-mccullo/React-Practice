@@ -5,7 +5,7 @@ const VideoListItem = ({video, onVideoSelect}) => {
 	// ES6: const {onVideoSelect} = props.onVideoSelect
 	const imageUrl = video.snippet.thumbnails.default.url;
 	return (
-		// THIS IS A CALLBACK FUNCTION --- the function onVideoSelect was passed from App component to this callback function
+		// The function onVideoSelect was passed from App, to VideoList, to this component
 		<li onClick = { () => onVideoSelect(video)} className="list-group-item">
 			<div className="video-list media">
 				<div className="media-left">
